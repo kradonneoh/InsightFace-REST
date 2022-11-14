@@ -9,7 +9,7 @@ class Arcface:
                  input_mean: float = 0.,
                  input_std: float = 1.,
                  **kwargs):
-        self.rec_model = onnxruntime.InferenceSession(rec_name)
+        self.rec_model = onnxruntime.InferenceSession(rec_name, providers=['TensorrtExecutionProvider', 'CUDAExecutionProvider', 'CPUExecutionProvider'])
         self.input_mean = input_mean
         self.input_std = input_std
         self.outputs = [e.name for e in self.rec_model.get_outputs()]
