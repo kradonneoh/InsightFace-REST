@@ -114,7 +114,7 @@ class DetectorInfer:
     def __init__(self, model='/models/onnx/centerface/centerface.onnx',
                  output_order=None, **kwargs):
 
-        self.rec_model = onnxruntime.InferenceSession(model)
+        self.rec_model = onnxruntime.InferenceSession(model, providers=['TensorrtExecutionProvider', 'CUDAExecutionProvider', 'CPUExecutionProvider'])
         logging.info('Detector started')
         self.input = self.rec_model.get_inputs()[0]
         self.input_dtype = self.input.type
